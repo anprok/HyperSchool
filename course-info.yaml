@@ -1,0 +1,15 @@
+type: hyperskill
+title: HyperSchool
+language: English
+summary: <p>Continuing education is the must-have of the 21st century. There are many
+  courses and educational programs. The main keys to success in this business are
+  good materials, impressive teachers, and good management. For now, let&#39;s create
+  a service for storing and processing information about courses and students.&nbsp;Let&#39;s
+  create a simple platform for students and teachers where you can add educational
+  programs and form different reports and schedules.</p><br/><br/>Learn more at <a
+  href="https://hyperskill.org/projects/255?utm_source=ide&utm_medium=ide&utm_campaign=ide&utm_content=project-card">https://hyperskill.org/projects/255</a>
+programming_language: Python
+content:
+- Topics
+- HyperSchool
+mode: Study

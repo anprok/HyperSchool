@@ -1,0 +1,12 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: elm_street_houses = ...
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7231#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Fri, 02 Sep 2022 16:39:25 UTC
+record: -1

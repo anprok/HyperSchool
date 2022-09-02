@@ -1,0 +1,117 @@
+<h2>Django settings file</h2>
+<html><body><p></p><p>Once we create a Django project, it comes with a predefined directory structure and files. Let's recreate the project called <code class="language-python">smithee</code> with the <code class="language-python">movies</code><em> </em>app<em> </em>inside it. To do so, write the following commands in the terminal/command line:</p>
+<pre><code class="language-no-highlight"># create project 'smithee'
+django-admin startproject smithee
+
+# change the cwd to the newly created project folder 'smithee'
+cd smithee
+
+# create app 'movies'
+python manage.py startapp movies</code></pre>
+<p>After executing the commands above, our project should have a structure like this:</p>
+<pre><code class="language-no-highlight">smithee           &lt;-- BASE_DIR      
+    --&gt; smithee                 
+            -&gt; __init__.py
+            -&gt; asgi.py
+            -&gt; settings.py    &lt;-- settings.py file 
+            -&gt; urls.py
+            -&gt; wsgi.py
+    --&gt; manage.py
+    --&gt; movies
+</code></pre>
+<p>The <em>settings.py</em><strong> </strong>file is the central one for configuring all Django projects. It<strong> </strong>is nothing else than a Python module with defined variables. All variables inside are constants, and according to <a href="https://legacy.python.org/dev/peps/pep-0008/#constants" rel="noopener noreferrer nofollow" target="_blank">PEP 0008</a> convention, they should be written with capital letters. In this topic, we will discuss things you can do with variables in the settings<strong> </strong>file.</p>
+<h5 id="base_dir">BASE_DIR</h5>
+<p>The <code class="language-python">BASE_DIR</code> variable refers to the base directory and points to the top hierarchy of any Django project. In our example, it is <code class="language-python">smithee</code>.</p>
+<p>This variable is always included in the Django settings file, and all other paths that we define in our project are relative to this base directory. You should use it if you want to manipulate the included files. For example, if you want to define the name for a log file, it can be <code class="language-python">LOG_FILE = os.path.join(BASE_DIR, 'smithee.logs')</code>.</p>
+<p>Older versions of Django (for example, Django 2.2) use the <a href="https://docs.python.org/3/library/os.html" rel="noopener noreferrer nofollow" target="_blank">os module</a> to configure the base directory:</p>
+<pre><code class="language-python">import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</code></pre>
+<p>Starting with Django 3.1, <code class="language-python">BASE_DIR</code> is defined with the <a href="https://docs.python.org/3/library/pathlib.html" rel="noopener noreferrer nofollow" target="_blank">pathlib module</a> as follows:</p>
+<pre><code class="language-python">from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent</code></pre>
+<p></p><div class="alert alert-primary"> The <code class="language-python">pathlib</code> module offers classes that represent filesystem paths with semantics appropriate for different operating systems. We won't get into details regarding the module, as this is beyond the scope of this topic. You can find more details on the <a href="https://docs.python.org/3/library/pathlib.html" rel="noopener noreferrer nofollow" target="_blank">Official documentation page</a>.</div><p></p>
+<h5 id="debug">DEBUG</h5>
+<p>As you probably know, Django comes with a built-in debugger that makes our life easier. To use the in-built debugger, set the <code class="language-python">DEBUG</code> variable to <code class="language-python">True</code>:</p>
+<pre><code class="language-python">DEBUG = True  # this is the default value and is preferred only in the development phase</code></pre>
+<p>One of the first things to do before launching a Django application in the real world is to set <code class="language-python">DEBUG</code> to <code class="language-python">False</code>. Features like "Error Handling and Notification" or "Accessing Static Resources" change their behavior when the <code class="language-python">DEBUG</code> variable is changed from <code class="language-python">True</code> to <code class="language-python">False</code>. Such changes are intended to increase project security.</p>
+<h5 id="allowed_hosts">ALLOWED_HOSTS</h5>
+<p><code class="language-python">ALLOWED_HOSTS</code> is a list with addresses of all domains that can run your project.</p>
+<p>By default, this variable is set to an empty list <code class="language-python">[]</code>, and it can stay like this in the development phase because the default address will be <code class="language-python">127.0.0.1</code> or <code class="language-python">localhost</code>. If you switch to <code class="language-python">DEBUG=False</code>, this variable can not be an empty list anymore. We will have to give hosts names, for example: <code class="language-python">ALLOWED_HOSTS = ["127.0.0.1", "movies.com"]</code><strong>. </strong>While <code class="language-python">127.0.0.1</code> represents your computer, <code class="language-python">movies.com</code> indicates that your application can be run on the domain with the corresponding name.</p>
+<p></p><div class="alert alert-primary">If you switch to <code class="language-python">DEBUG=False</code> and <code class="language-python">ALLOWED_HOSTS</code> is left empty, Django will refuse to serve requests and respond with <code class="language-python">HTTP 400 bad request</code> instead.</div><p></p>
+<h5 id="secret_key">SECRET_KEY</h5>
+<p>The <code class="language-python">SECRET_KEY</code> variable is another security-related variable like <code class="language-python">ALLOWED_HOSTS</code>. Unlike <code class="language-python">ALLOWED_HOSTS</code>, which is empty by default,<strong> </strong><code class="language-python">SECRET_KEY</code> has a default value, for example like this:</p>
+<pre><code class="language-no-highlight">SECRET_KEY = 'oubrz5ado&amp;%+t(qu^fqo_#uhn7*+q*#9b3gje0-yj7^#g#ronn'</code></pre>
+<p>The purpose of this variable is to <em>sign</em> certain data structures digitally. Specifically, Django uses the <code class="language-python">SECRET_KEY</code> on sensitive data structures like session identifiers, cookies and password reset tokens by default. However, you can use it to protect any sensitive data structure<strong> </strong>in your project.</p>
+<p></p><div class="alert alert-primary">You should be careful about exposing your project's <code class="language-python">SECRET_KEY</code>. If you suspect for any reason that it has been compromised, replace it immediately.</div><p></p>
+<p>Below is an example of how Django uses the secret key under the hood to sign sensitive pieces of information:</p>
+<pre><code class="language-python">from django.core.signing import Signer
+
+signer = Signer()
+
+# generate a cryptographicaly signed value for the string "Sensitive data"
+value = signer.sign('Sensitive data')
+
+print(value)
+# Sensitive data:GdMGD6HNQ_qdgxYP8yBZAdAIV1w</code></pre>
+<p>The signature is appended to the end of the string, right after the colon. By default, the <code class="language-python">Signer</code> class uses the <code class="language-python">SECRET_KEY</code> setting to generate signatures.</p>
+<p>We won't delve into details regarding the <code class="language-python">Signer</code> class; this is outside our topic. You can always refer to the <a href="https://docs.djangoproject.com/en/3.2/topics/signing/" rel="noopener noreferrer nofollow" target="_blank">Official documentation page</a>.</p>
+<h5 id="installed_apps">INSTALLED_APPS</h5>
+<p>You already know that the <code class="language-python">INSTALLED_APPS</code> variable is a list containing all apps that are used in a project. We have created an app called <code class="language-python">movies</code><em><strong>. </strong></em>To let Django know that the app exists, we have to add the app name at the end of the list with installed applications:</p>
+<pre><code class="language-python">INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'movies', # don't forget to put it inside quotes and also add commas after every app
+]</code></pre>
+<h5 id="templates">TEMPLATES</h5>
+<p>Django has a convenient way to generate HTML dynamically. The most common approach relies on <em>templates</em>. A template contains the static parts of the desired HTML output and special syntax that describes how dynamic content is inserted. To manage these files, Django makes use of template engines. Templates engines are configured with the <code class="language-python">TEMPLATES</code> setting that represents a list of configurations for each engine:</p>
+<pre><code class="language-python">TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            # other options here ...
+        },
+    },
+]</code></pre>
+<p><code class="language-python"><span style="color: #000000;">BACKEND</span></code> is a dotted Python path to a template engine class implementing the template backend API. The built-in backends are <code class="language-python">django.template.backends.django.DjangoTemplates</code> (<a href="https://docs.djangoproject.com/en/3.2/topics/templates/#django.template.backends.django.DjangoTemplates" rel="noopener noreferrer nofollow" target="_blank">Official documentation</a>) and <code class="language-python">django.template.backends.jinja2.Jinja2</code> (<a href="https://docs.djangoproject.com/en/3.2/topics/templates/#django.template.backends.jinja2.Jinja2" rel="noopener noreferrer nofollow" target="_blank">Official documentation</a>).</p>
+<p>Since most engines load templates from files, the top-level configuration for each engine contains two common settings:</p>
+<ul>
+<li><code class="language-python">DIRS</code> defines a list of directories where the engine looks for template source files;</li>
+<li><code class="language-python">APP_DIRS</code> tells whether the engine should look for templates inside the installed applications. Each backend defines a conventional name for the subdirectory inside applications where templates should be stored.</li>
+</ul>
+<p>Lastly, <code class="language-python">OPTIONS</code> contains extra parameters for a template backend. Available parameters vary depending on the template backend.</p>
+<h5 id="databases">DATABASES</h5>
+<p>In Django projects, you employ SQLite databases by default:</p>
+<pre><code class="language-python">DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}</code></pre>
+<p><code class="language-python">DATABASES</code> is a constant dictionary of the database connection information. You can have connections to multiple databases, but usually, you will need the <code class="language-python">default</code> entry. Take a look at possible options:</p>
+<ul>
+<li><code class="language-python">default</code> is the default database connection configuration. You should always have a default set of connections settings;</li>
+<li><code class="language-python">ENGINE</code>, in our case, tells Django to use the SQLite backend;</li>
+<li><code class="language-python">NAME</code> will indicate the path to the database you want to connect to.</li>
+</ul>
+<p>In addition to SQLite, Django also supports other popular databases: PostgreSQL, MySQL, and Oracle.</p>
+<h5 id="url-and-root-variables">URL and ROOT variables</h5>
+<p>Websites generally deliver additional data such as images, videos, or style-related files such as CSS files. In Django, we refer to these files as <strong>media</strong> and <strong>static</strong> <strong>files</strong>. Django provides a pre-installed app to help you manage them. For that, we need to set up the <code class="language-python">URL</code> and <code class="language-python">ROOT</code> variables inside the settings file.</p>
+<p><code class="language-python">URL</code> variables are either <code class="language-python">STATIC_URL</code> or <code class="language-python">MEDIA_URL</code>; they indicate paths relative to the <code class="language-python">BASE_DIR</code> variable. In other words, think of this as a reference to static and media files, for example, <code class="language-python">http://127.0.0.1:8000/static/css/style.css</code>. While <code class="language-python">STATIC_URL</code> is used for reference to the static files (files responsible for the app style), <code class="language-python">MEDIA_URL</code> will refer to any media file (audio, video, and so on). </p>
+<p><code class="language-python">ROOT</code><strong> </strong>variables indicate absolute paths. Like <code class="language-python">URL</code>, they can be either <code class="language-python">STATIC_ROOT</code> or <code class="language-python">MEDIA_ROOT</code>.<strong> </strong>Their purpose is to retrieve static and media files. Think of this as the single root directory from where a Django application takes static and media files.</p>
+<p>To configure <code class="language-python">URL</code> and <code class="language-python">ROOT</code> variables, add the following lines at the end of <code class="language-python">settings.py</code>: </p>
+<pre><code class="language-python">STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')</code></pre>
+<h5 id="conclusion">Conclusion</h5>
+<p>The <code class="language-python">settings.py</code> file is a small but very important and powerful part of any Django project. If it's incorrect, it can give you a lot of headaches during all development phases. But if you do it right, it will be a good basis for your project to grow and scale in the future. There are other points of the settings file that we haven't touched yet, but for now, let's practice what you've learned.  </p></body></html>

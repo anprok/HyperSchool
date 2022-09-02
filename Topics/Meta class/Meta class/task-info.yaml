@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: The meta class should be written as inner class of the model
+- text: All the available meta class options can be overridden
+- text: The meta class gives information about the model class
+- text: The meta class can be used to add or remove fields form the model class
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/17636#comment
+status: Solved
+record: -1
+local_check: false

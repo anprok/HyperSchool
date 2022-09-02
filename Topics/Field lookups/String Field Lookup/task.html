@@ -1,0 +1,17 @@
+<h2>String Field Lookup</h2>
+<p>You have a model <code class="language-python">Engine</code> with fields <em>type</em><em>, volume</em> and a model <code class="language-python">Car</code><em> </em>with fields <em>color</em>, <em>engine</em>, <em>speed</em>:</p>
+
+<pre><code class="language-python">class Engine(models.Model):
+    type = models.CharField(max_length=32)
+    volume = models.IntegerField()
+
+
+class Car(models.Model):
+    color = models.CharField(max_length=32)
+    engine = models.ForeignKey(Engine, on_delete=models.CASCADE)
+    speed = models.FloatField()</code></pre>
+
+<p>Filter cars which have "red" in their color, i.e. field color contains substring "red". The result should be a QuerySet object.</p><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 15 seconds</font><br><br>
+<b>Caution</b><br><br>
+You may see errors in your code or execution results due to missing context. Don’t worry about it, just write the solution and press Check.
+<br><br>

@@ -1,0 +1,13 @@
+<p>Feel free to choose any course you interested in!</p>
+<p>Upgrade you professional skills with our school!</p>
+<h2>Name of program: {{ object.title }}</h2>
+<p>Total price: {{ object.price }}</p>
+<p>Info: {{ object.info }}</p>
+<p>Course duration: {{ object.duration }}</p>
+<p>Teachers of the course:</p>
+{% for teacher in object.teacher.all %}
+    <a href="{{ teacher.get_detail_url }}"> {{ teacher.name }} {{ teacher.surname }} </a>
+{% endfor %}
+<p>Already studying:</p>
+{{ students | unordered_list }}
+<a href="/schedule/main/">Go back to the list of courses</a>

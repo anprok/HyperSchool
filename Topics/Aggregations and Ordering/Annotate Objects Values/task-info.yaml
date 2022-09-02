@@ -1,0 +1,12 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: apartments_per_street = ...
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7234#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Fri, 02 Sep 2022 17:14:54 UTC
+record: -1

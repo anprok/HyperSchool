@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: filter
+- text: managed
+- text: ordering
+- text: proxy
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/17637#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Wed, 31 Aug 2022 13:43:50 UTC
+record: -1
+selected_options:
+- 0
+local_check: false

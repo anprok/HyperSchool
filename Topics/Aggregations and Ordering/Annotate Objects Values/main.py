@@ -1,0 +1,1 @@
+apartments_per_street = House.objects.values('street') .annotate(count=Sum('apartments'))

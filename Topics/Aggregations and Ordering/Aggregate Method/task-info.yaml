@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: second_query is the number of objects per each street
+- text: second_query is the number of all objects
+- text: first_query is the number of objects per each street
+- text: first_query is the number of all objects
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7229#comment
+status: Solved
+record: -1
+local_check: false

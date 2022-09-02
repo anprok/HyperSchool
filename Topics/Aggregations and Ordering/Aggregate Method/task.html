@@ -1,0 +1,9 @@
+<h2>Aggregate Method</h2>
+<html><body><p>We have a model <em>House </em>with fields <em>street, house_number:</em></p>
+<pre><code class="language-python">class House(models.Model):
+    house_number = models.IntegerField()
+    street = models.CharField(max_length=64)</code></pre>
+<p>Select all the correct answers for using the <code class="language-python">Count</code> function in this model.</p>
+<pre><code class="language-python"># Use in test
+first_query = House.objects.aggregate(count=Count('house_number'))
+second_query = House.objects.values('street').aggregate(count=Count('house_number'))</code></pre></body></html>

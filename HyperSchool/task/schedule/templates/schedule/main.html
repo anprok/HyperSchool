@@ -1,0 +1,20 @@
+{% extends 'schedule/base.html' %}
+
+<!— base.html block content goes below -->
+{% block content %}
+
+<a href="/login/">Login</a>
+<a href="/signup/">Sign Up</a>
+<form action="" method="get">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Search">
+</form>
+<p>{{ quantity }} courses</p>
+<ul>
+ {% for course in courses %}
+    <li><a href="{{ course.get_detail_url }}">{{ course.title }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

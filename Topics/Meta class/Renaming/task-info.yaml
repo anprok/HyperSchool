@@ -1,0 +1,14 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: "from django.db import models\n\n\nclass Mouse(models.Model):\n    name =\
+    \ models.CharField(max_length=64)\n    class Meta:\n        app_label = 'mouse'\
+    \ \n        ..."
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/17639#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Wed, 31 Aug 2022 13:42:52 UTC
+record: -1

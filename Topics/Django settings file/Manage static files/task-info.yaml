@@ -1,0 +1,16 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: "from pathlib import Path\nimport os       \n\nBASE_DIR = Path(__file__).resolve().parent.parent\n\
+    # some other settings\n# your code here"
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/17068#comment
+status: Solved
+feedback:
+  message: |-
+    <html>Great work! You are now one step closer to mastering Django! Keep up the good work!
+
+    </html>
+  time: Fri, 02 Sep 2022 16:17:01 UTC
+record: -1

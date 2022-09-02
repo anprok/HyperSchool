@@ -1,0 +1,12 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: red_cars = ...
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/7043#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Thu, 01 Sep 2022 14:39:08 UTC
+record: -1
